@@ -34,7 +34,7 @@ class EditActivity : AppCompatActivity() {
 
         // gestiona el texto que haga de boton y redirija a la  pantalla de registro.
         binding.save.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, CuentaActivity::class.java)
             startActivity(intent)
         }
     }

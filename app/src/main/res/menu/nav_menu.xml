@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/event"
+        android:title="@string/mis_event"
+        android:iconTint="@color/black"
+
+        />
+
+    <item
+        android:id="@+id/ñ_event"
+        android:title="@string/aña_event"
+        android:iconTint="@color/black"
+
+        />
+    <item
+        android:id="@+id/h_event"
+        android:title="@string/his_event"
+        android:iconTint="@color/black"
+
+        />
+
+    <item
+        android:id="@+id/ubi"
+        android:title="@string/Cam_ubi"
+        android:iconTint="@color/black"
+
+        />
+
+</menu>

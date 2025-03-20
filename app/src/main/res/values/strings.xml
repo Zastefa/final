@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Final</string>
+    <string name="mis_event"> Mis eventos</string>
+    <string name="aña_event">Añadir eventos</string>
+    <string name="his_event">Historial de eventos</string>
+    <string name="Cam_ubi">Canbiar ubicación</string>
+    <string name="usuario">Perfil</string>
+    <string name="home">Home</string>
+    <string name="reseña">Reseña</string>
+
+
 </resources>

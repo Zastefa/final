@@ -14,6 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import android.Manifest
 import android.content.pm.PackageManager
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+
 
 class CuentaActivity : AppCompatActivity() {
 
@@ -22,6 +25,16 @@ class CuentaActivity : AppCompatActivity() {
 
     private val CAMERA_PERMISSION_REQUEST_CODE = 100
     private val CAMERA_REQUEST_CODE = 101
+
+    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){uri->
+
+        if (uri!=null){
+            binding.imageUser.setImageURI(uri)
+        }else{
+            //no ninguna imagen
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +52,20 @@ class CuentaActivity : AppCompatActivity() {
             binding.txtEmailUsuario.text = "Usuario no conectado"
             redirectToLogin()
         }
+
+
+
+
         // gestiona el boton de login del la pagina principal
         binding.creaTarea.setOnClickListener {
             val intent = Intent(this, TaskActivity::class.java)
             startActivity(intent)
         }
 
+
+
         // Gestiona el botón que redirige a la página principal
-        binding.Home.setOnClickListener {
+        binding.maps.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -64,6 +83,11 @@ class CuentaActivity : AppCompatActivity() {
 
         // Configura el botón de la cámara
         binding.camara.setOnClickListener {
+
+            pickMedia.launch(
+                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+
+            )
             // Verifica permisos antes de abrir la cámara
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 openCamera()

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.ResenaFragment"
+    android:background="@color/green"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/TodasReseña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Reseña"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/res"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
