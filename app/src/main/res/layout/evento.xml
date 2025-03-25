@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gre"
+    android:padding="16dp">
+
+
+    <TextView
+        android:id="@+id/titulo_evento"
+        android:layout_width="348dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/beiges"
+        android:fontFamily="cursive"
+        android:text=" Evento"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/nombre_evento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salon del manga"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/ubicacion_evento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cataluña, Barcelona"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"/>
+
+
+    <ImageView
+        android:id="@+id/imagen_evento"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/imaeven" />
+
+    <TextView
+        android:id="@+id/descripcion_evento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Se busca gente que este interesada en formar un grupo para hacer cosplay en conjunto y ir al salón del manga. Apuntate si quieres asistir y no tienes con quien."
+        android:layout_marginTop="16dp"/>
+
+
+    <TextView
+        android:id="@+id/ubicacion_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ubicación"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <ImageView
+        android:id="@+id/mapa_evento"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/mapa"
+        android:scaleType="centerCrop"/>
+
+
+
+
+</LinearLayout>

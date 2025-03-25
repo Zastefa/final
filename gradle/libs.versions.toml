@@ -1,0 +1,55 @@
+[versions]
+agp = "8.9.0"
+firebaseAuthImpl = "16.1.0"
+firebaseBom = "33.8.0"
+fragmentKtx = "1.2.5"
+kotlin = "2.1.0"
+coreKtx = "1.15.0"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.7.0"
+lifecycleViewmodelIossimulatorarm64 = "2.8.7"
+material = "1.12.0"
+activity = "1.10.0"
+constraintlayout = "2.2.0"
+navigationRuntimeKtx = "2.8.6"
+supportAnnotations = "28.0.0"
+library = "8.8.0"
+firebaseAuthKtx = "23.1.0"
+navigationRuntimeAndroid = "2.9.0-alpha05"
+firebaseFirestoreKtx = "25.1.1"
+firebaseFirestore = "25.1.1"
+annotation = "1.9.1"
+supportV4 = "28.0.0"
+recyclerview = "1.4.0"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-viewmodel-iossimulatorarm64 = { module = "androidx.lifecycle:lifecycle-viewmodel-iossimulatorarm64", version.ref = "lifecycleViewmodelIossimulatorarm64" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-auth-impl = { module = "com.google.firebase:firebase-auth-impl", version.ref = "firebaseAuthImpl" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+fragment-ktx = { module = "androix.fragment:fragment-ktx", version.ref = "fragmentKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
+support-annotations = { group = "com.android.support", name = "support-annotations", version.ref = "supportAnnotations" }
+library = { group = "com.android.databinding", name = "library", version.ref = "library" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+androidx-navigation-runtime-android = { group = "androidx.navigation", name = "navigation-runtime-android", version.ref = "navigationRuntimeAndroid" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
+support-v4 = { group = "com.android.support", name = "support-v4", version.ref = "supportV4" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
