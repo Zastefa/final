@@ -7,6 +7,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -42,25 +43,39 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,
         setContentView(binding.root)
 
         initFirebaseAuth()
-        setupDrawerToggle()
-        setupNavigationDrawer()
-
+        setupUI()
         initMapFragment()
+
+
+        // Si viene desde el botón de ubicación, ignora la selección del BottomNav
+        if (intent?.hasExtra("open_map") == true) {
+            initMapFragment()  // Inicializa el mapa directamente
+        } else {
+            setupBottomNavigation()  // Configuración normal
+        }
     }
 
     private fun initFirebaseAuth() {
         firebaseAuth = FirebaseAuth.getInstance()
     }
 
-    private fun setupDrawerToggle() {
+    private fun setupUI() {
+        setupActionBar()
+        setupNavigationDrawer()
+        setupBottomNavigation()
+        setupFabButton()
+    }
+
+    private fun setupActionBar() {
         toggle = ActionBarDrawerToggle(
             this,
-            binding.main,
+            binding.drawerLayout,
             R.string.open_drawer,
             R.string.close_drawer
-        )
-        binding.main.addDrawerListener(toggle)
-        toggle.syncState()
+        ).apply {
+            binding.drawerLayout.addDrawerListener(this)
+            syncState()
+        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -69,32 +84,58 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,
             when (item.itemId) {
                 R.id.event -> navigateTo(TaskActivity::class.java)
                 R.id.ñ_event -> navigateTo(TaskActivity::class.java)
-                R.id.h_event -> navigateTo(EditActivity::class.java)
-                R.id.ubi -> navigateTo(EditActivity::class.java)
-
+                R.id.h_event -> navigateTo(ListActivity::class.java)
+                R.id.ubi -> { /* Already here */ }
             }
-            binding.main.closeDrawer(GravityCompat.START)
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
     }
 
+    private fun setupBottomNavigation() {
+        binding.bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.rese -> navigateTo(ListActivity::class.java)
+                R.id.inicio -> navigateTo(InicioActivity::class.java)
+                R.id.perfil -> navigateTo(CuentaActivity::class.java)
+                else -> false
+            }
+            true
+        }
+        binding.bottomNav.selectedItemId = R.id.inicio
+    }
 
+    private fun setupFabButton() {
+        binding.fabMenu.setOnClickListener {
+            toggleDrawer()
+        }
+    }
 
-    private fun <T : Any> navigateTo(activityClass: Class<T>) {
+    private fun toggleDrawer() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+    }
+
+    private fun <T : AppCompatActivity> navigateTo(activityClass: Class<T>) {
         startActivity(Intent(this, activityClass))
     }
 
     private fun initMapFragment() {
-        (supportFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment)?.getMapAsync(this)
-            ?: showError("Map fragment not found")
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
+        mapFragment?.getMapAsync(this) ?: showError("Map fragment not found")
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap.apply {
             setOnMyLocationButtonClickListener(this@MainActivity)
             setOnMyLocationClickListener(this@MainActivity)
-            createMarker()
+            uiSettings.isZoomControlsEnabled = true
+            uiSettings.isMyLocationButtonEnabled = true
         }
+        createMarker()
         enableLocation()
     }
 
@@ -129,7 +170,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,
                 }
             }
             shouldShowPermissionRationale() -> {
-                showToast("Por favor, activa los permisos de ubicación en ajustes para una mejor experiencia")
+                showToast("Please enable location permissions in settings for better experience")
             }
             else -> {
                 requestLocationPermission()
@@ -164,36 +205,42 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     enableLocation()
                 } else {
-                    showToast("Permiso de ubicación denegado. Algunas funciones estarán limitadas")
+                    showToast("Location permission denied. Some features will be limited")
                 }
             }
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        if (binding.main.isDrawerOpen(GravityCompat.START)) {
-            binding.main.closeDrawer(GravityCompat.START)
-        } else {
-            binding.main.openDrawer(GravityCompat.START)
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        if (!::map.isInitialized) return
+        if (!isLocationPermissionGranted()) {
+            map.isMyLocationEnabled = false
+            showToast("To enable location, please go to settings and accept permissions")
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        toggleDrawer()
         return true
     }
 
     override fun onBackPressed() {
-        if (binding.main.isDrawerOpen(GravityCompat.START)) {
-            binding.main.closeDrawer(GravityCompat.START)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
     }
 
     override fun onMyLocationButtonClick(): Boolean {
-        showToast("Centrando en tu ubicación actual")
+        showToast("Centering on your current location")
         return false
     }
 
     override fun onMyLocationClick(location: Location) {
-        showToast("Estás en ${location.latitude}, ${location.longitude}")
+        showToast("You're at ${location.latitude}, ${location.longitude}")
     }
 
     private fun showToast(message: String) {
@@ -203,12 +250,5 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,
     private fun showError(message: String) {
         Log.e("MainActivity", message)
         Toast.makeText(this, "Error: $message", Toast.LENGTH_LONG).show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (::binding.isInitialized) {
-            binding.root.removeAllViews()
-        }
     }
 }

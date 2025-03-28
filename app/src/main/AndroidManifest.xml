@@ -81,7 +81,21 @@
         </activity>
 
         <activity
-            android:name=".View.ReseñaActivity">
+            android:name=".View.ResenaActivity"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+
+        </activity>
+        <activity
+            android:name=".View.RecuperarPasswordActivity">
+
+        </activity>
+        <activity
+            android:name=".View.ListActivity">
+
+        </activity>
+        <activity
+            android:name=".View.InicioActivity">
 
         </activity>
     </application>

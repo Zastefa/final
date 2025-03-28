@@ -1,161 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@drawable/fondo1"
+    android:fitsSystemWindows="true"
     tools:context=".View.CuentaActivity">
 
-    <androidx.cardview.widget.CardView
+    <!-- Contenido principal -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="8dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!-- Toolbar personalizada -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            app:navigationIcon="@drawable/ic_menu"
+            app:title="Mi Perfil"
+            app:titleTextColor="@android:color/white"/>
+
+        <!-- ScrollView para contenido desplazable -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            android:background="@color/white">
+
+            <!-- Contenedor principal del perfil -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                tools:listitem="@layout/item_post">
+
+                <!-- Sección superior: Foto de perfil + Estadísticas -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@layout/item_post"
+                    android:orientation="horizontal">
+
+                    <!-- Foto de perfil circular (usando CircleImageView) -->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imageUser"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/user4"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="2dp" />
+
+                    <!-- Estadísticas (Seguidores, Seguidos, Eventos) -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/gre"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_event_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4"
+                                android:textColor="@color/ore"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blue_1"
+                                android:textCursorDrawable="@color/gray"
+                                android:text="Eventos"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/gre"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_followers_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/ore"
+                                android:text="23"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blue_1"
+                                android:textCursorDrawable="@color/gray"
+                                android:text="View"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/gre"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_following_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/ore"
+                                android:text="20"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blue_1"
+                                android:textCursorDrawable="@color/gray"
+                                android:text="Reseñas"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/nombre"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="Nombre de Usuario"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/camara"
+                                android:layout_width="49dp"
+                                android:layout_height="46dp"
+                                android:layout_marginEnd="16dp"
+                                android:paddingBottom="@dimen/cardview_default_elevation"
+                                android:contentDescription="Abrir cámara"
+                                android:src="@drawable/can" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="24dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="173dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtEmailUsuario"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="4dp"
+                                    android:text="@string/email_ejemplo"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/galleryButton"
+                                android:layout_width="50dp"
+                                android:layout_height="45dp"
+                                android:paddingBottom="@dimen/cardview_default_elevation"
+
+                                android:contentDescription="Abrir galería"
+                                android:src="@drawable/add" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="24dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/textPerfil"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Editar Perfil"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.843"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.036" />
+
+                            <ImageView
+                                android:id="@+id/botLoc"
+                                android:layout_width="75dp"
+                                android:layout_height="48dp"
+                                android:contentDescription="Ubicación"
+                                android:paddingBottom="@dimen/cardview_default_elevation"
+                                app:itemTextColor="@color/green"
+                                android:src="@drawable/location"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/creaTarea" />
+
+                        </LinearLayout>
+                        
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+                <Button
+                    android:id="@+id/creaTarea"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/ore"
+                    android:text="Crear evento"
+                    android:textColor="@color/blue_1"
+                    android:textSize="16sp"/>
+
+
+                <!-- Pestañas (Eventos, Guardados, etc.) -->
+                <TextView
+                    android:id="@+id/sesion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="8dp"
+                    android:text="Cerra sesion"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.927"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.09" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:tabIndicatorColor="@color/black"
+                    app:tabSelectedTextColor="@color/black"
+                    app:tabTextColor="@color/gre">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/eventos"/>
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/favoritos"/>
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/guardados"/>
+                </com.google.android.material.tabs.TabLayout>
+
+                <!-- Grid de eventos/publicaciones (RecyclerView) -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_posts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    tools:listitem="@layout/item_post"/>
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </ScrollView>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/beiges"
-            android:padding="16dp">
+            app:menu="@menu/nav_button"
+            app:backgroundTint="@color/gre"
+            app:itemIconTint="@color/oren"
+            app:labelVisibilityMode="labeled"/>
 
-            <!-- Toolbar -->
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:titleTextColor="@android:color/white" />
+    </LinearLayout>
 
-            <!-- ImageView para la foto de perfil -->
-            <ImageView
-                android:id="@+id/imageUser"
-                android:layout_width="215dp"
-                android:layout_height="199dp"
-                android:layout_marginTop="16dp"
-                android:contentDescription="imagen"
-                android:scaleType="centerCrop"
-                android:src="@drawable/user"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+        app:itemTextColor="@color/black"/>
+</androidx.drawerlayout.widget.DrawerLayout>
 
 
-            <LinearLayout
-                android:id="@+id/cameraButtonsContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageUser">
 
 
-                <ImageView
-                    android:id="@+id/camara"
-                    android:layout_width="72dp"
-                    android:layout_height="52dp"
-                    android:layout_marginEnd="16dp"
-                    android:contentDescription="usuario"
-                    android:src="@drawable/can"
-                    />
 
 
-                <ImageView
-                    android:id="@+id/galleryButton"
-                    android:layout_width="72dp"
-                    android:layout_height="52dp"
-                    android:contentDescription="gallery"
-                    android:src="@drawable/add"
 
-                    />
-            </LinearLayout>
 
-            <!-- Nombre del usuario -->
-            <TextView
-                android:id="@+id/nombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Yuses Pérez"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cameraButtonsContainer" />
 
-            <!-- Email del usuario -->
-            <TextView
-                android:id="@+id/txtEmailUsuario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="juan.perez@example.com"
-                android:textColor="#757575"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
-            <!-- Botón para crear tarea -->
-            <Button
-                android:id="@+id/creaTarea"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="@color/blue_1"
-                android:text="crear evento"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtEmailUsuario" />
-
-            <!-- Botón para mapa -->
-            <ImageView
-                android:id="@+id/maps"
-                android:layout_width="72dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="16dp"
-                android:contentDescription="ubicacion"
-                android:src="@drawable/location"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/creaTarea" />
-
-            <!-- Botón para editar perfil -->
-            <TextView
-                android:id="@+id/textPerfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Edit"
-                android:textColor="@color/beiges"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/maps" />
-
-            <!-- Botón para cerrar sesión -->
-            <TextView
-                android:id="@+id/sesion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:textColor="@color/beiges"
-                android:text="secion"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textPerfil" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>

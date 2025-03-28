@@ -48,6 +48,11 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, UsuarioActivity::class.java)
             startActivity(intent)
         }
+        binding.recPass.setOnClickListener {
+            val intent = Intent(this, RecuperarPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
 
         binding.butLogin.setOnClickListener{
             val email = binding.editTextTextEmailAddress.text.toString().trim()

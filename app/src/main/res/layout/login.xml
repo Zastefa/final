@@ -8,45 +8,45 @@
     tools:context=".View.LoginActivity">
 
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="409dp"
+        android:layout_height="913dp"
+        android:background="@drawable/prototipo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp" />
+
     <EditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="305dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="40dp"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawablePadding="12dp"
-        android:paddingEnd="12dp"
-        android:paddingStart="12dp"
+        android:layout_width="216dp"
+        android:layout_height="51dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:background="@drawable/custom_imput"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintHorizontal_bias="0.589"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.545"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="305dp"
-        android:layout_height="54dp"
-        android:drawableStart="@drawable/ic_email_focused"
-        android:drawablePadding="12dp"
-        android:hint="Email"
-        android:paddingEnd="12dp"
-        android:paddingStart="12dp"
+        android:layout_width="217dp"
+        android:layout_height="50dp"
         android:ems="10"
+        android:hint="Email"
         android:inputType="text"
-        android:background="@drawable/custom_imput"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.353"
+        app:layout_constraintVertical_bias="0.416"
         tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -65,37 +65,33 @@
         android:id="@+id/textSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
-        android:layout_marginBottom="244dp"
-        android:text="Registrarse"
+        android:text="@string/registrars"
         android:textColor="@color/blue_1"
         android:textCursorDrawable="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.823"
+        app:layout_constraintHorizontal_bias="0.799"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.641" />
 
     <TextView
         android:id="@+id/recContraseña"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
-        android:layout_marginBottom="244dp"
-        android:text="Recuperar Contraseña?"
+        android:text="@string/recuperar_contrase_as"
         android:textColor="@color/blue_1"
         android:textCursorDrawable="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.223"
+        app:layout_constraintHorizontal_bias="0.196"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.641" />
 
     <ImageView
         android:id="@+id/butLogin"
@@ -103,22 +99,11 @@
         android:layout_height="97dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
-        app:layout_constraintVertical_bias="0.486"
-        app:srcCompat="@drawable/but" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="205dp"
-        android:layout_height="181dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634"
-        app:srcCompat="@drawable/eventure" />
+        app:layout_constraintVertical_bias="0.783"
+        app:srcCompat="@drawable/but" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
