@@ -1,15 +1,17 @@
 package com.example.afinal.View
 
 import android.Manifest
-import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import com.example.afinal.R
 import com.example.afinal.databinding.ActivityMainBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -20,97 +22,135 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback,
+    GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
 
-    private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMainBinding
+    private lateinit var map: GoogleMap
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var toggle: ActionBarDrawerToggle
 
     companion object {
-        const val REQUEST_CODE_LOCATION = 0
+        private const val REQUEST_CODE_LOCATION = 100
+        private const val DEFAULT_ZOOM_LEVEL = 18f
+        private val CEAC_COORDINATES = LatLng(41.35124, 2.12582)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        createFragment()
 
-        // Initialize Firebase Authentication
+        initFirebaseAuth()
+        setupDrawerToggle()
+        setupNavigationDrawer()
+
+        initMapFragment()
+    }
+
+    private fun initFirebaseAuth() {
         firebaseAuth = FirebaseAuth.getInstance()
     }
 
-    private fun createFragment() {
-        val mapFragment: SupportMapFragment =
-            supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+    private fun setupDrawerToggle() {
+        toggle = ActionBarDrawerToggle(
+            this,
+            binding.main,
+            R.string.open_drawer,
+            R.string.close_drawer
+        )
+        binding.main.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun setupNavigationDrawer() {
+        binding.navView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.event -> navigateTo(TaskActivity::class.java)
+                R.id.ñ_event -> navigateTo(TaskActivity::class.java)
+                R.id.h_event -> navigateTo(EditActivity::class.java)
+                R.id.ubi -> navigateTo(EditActivity::class.java)
+
+            }
+            binding.main.closeDrawer(GravityCompat.START)
+            true
+        }
+    }
+
+
+
+    private fun <T : Any> navigateTo(activityClass: Class<T>) {
+        startActivity(Intent(this, activityClass))
+    }
+
+    private fun initMapFragment() {
+        (supportFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment)?.getMapAsync(this)
+            ?: showError("Map fragment not found")
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        Log.d("MapsDebug", "Mapa cargado correctamente")
-        map = googleMap
-        createMarker()
+        map = googleMap.apply {
+            setOnMyLocationButtonClickListener(this@MainActivity)
+            setOnMyLocationClickListener(this@MainActivity)
+            createMarker()
+        }
         enableLocation()
-        //map.setOnMyLocationButtonClickListener()
-
     }
 
     private fun createMarker() {
-        val coordinates = LatLng(41.35124, 2.12582)
-        val marker: MarkerOptions =
-            MarkerOptions().position(coordinates).title("CEAC tu centro de estudio!!")
-        map.addMarker(marker)
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 18f), 4000, null)
+        try {
+            map.addMarker(
+                MarkerOptions()
+                    .position(CEAC_COORDINATES)
+                    .title("CEAC tu centro de estudio!!")
+            )
+            map.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(CEAC_COORDINATES, DEFAULT_ZOOM_LEVEL),
+                4000,
+                null
+            )
+        } catch (e: Exception) {
+            showError("Error creating map marker: ${e.message}")
+        }
+    }
+
+    private fun enableLocation() {
+        if (!::map.isInitialized) return
+
+        when {
+            isLocationPermissionGranted() -> {
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    map.isMyLocationEnabled = true
+                }
+            }
+            shouldShowPermissionRationale() -> {
+                showToast("Por favor, activa los permisos de ubicación en ajustes para una mejor experiencia")
+            }
+            else -> {
+                requestLocationPermission()
+            }
+        }
     }
 
     private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
         this, Manifest.permission.ACCESS_FINE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
 
-    private fun enableLocation() {
-        if (!::map.isInitialized) return
-        if (isLocationPermissionGranted()) {
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return
-            }
-            map.isMyLocationEnabled = true
-        } else {
-            requestLocationPermission()
-        }
-    }
+    private fun shouldShowPermissionRationale() = ActivityCompat.shouldShowRequestPermissionRationale(
+        this, Manifest.permission.ACCESS_FINE_LOCATION
+    )
 
     private fun requestLocationPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        ) {
-            Toast.makeText(
-                this,
-                "Por favor, habilita los permisos de ubicación en la configuración de la aplicación",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_CODE_LOCATION
-            )
-        }
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            REQUEST_CODE_LOCATION
+        )
     }
 
     override fun onRequestPermissionsResult(
@@ -122,59 +162,53 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         when (requestCode) {
             REQUEST_CODE_LOCATION -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    enableLocation() // Enable location if permission granted
+                    enableLocation()
                 } else {
-                    Toast.makeText(
-                        this,
-                        "Para activar la localización ve a ajustes y acepta los permisos",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showToast("Permiso de ubicación denegado. Algunas funciones estarán limitadas")
                 }
             }
-            else -> {}
         }
     }
 
-    override fun onResumeFragments() {
-        super.onResumeFragments()
-        if (!::map.isInitialized) return
-        if (!isLocationPermissionGranted()) {
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return
-            }
-            map.isMyLocationEnabled = false
-            Toast.makeText(
-                this,
-                "Para activar la localización ve a ajustes y acepta los permisos",
-                Toast.LENGTH_SHORT
-            ).show()
+    override fun onSupportNavigateUp(): Boolean {
+        if (binding.main.isDrawerOpen(GravityCompat.START)) {
+            binding.main.closeDrawer(GravityCompat.START)
+        } else {
+            binding.main.openDrawer(GravityCompat.START)
+        }
+        return true
+    }
+
+    override fun onBackPressed() {
+        if (binding.main.isDrawerOpen(GravityCompat.START)) {
+            binding.main.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 
-     fun onMyLocationButtonClick(): Boolean {
-        Toast.makeText(this, "Botón pulsado", Toast.LENGTH_SHORT).show()
+    override fun onMyLocationButtonClick(): Boolean {
+        showToast("Centrando en tu ubicación actual")
         return false
     }
 
-     fun onMyLocationClick(location: Location) {
-        Toast.makeText(
-            this,
-            "Estás en ${location.latitude}, ${location.longitude}",
-            Toast.LENGTH_SHORT
-        ).show()
+    override fun onMyLocationClick(location: Location) {
+        showToast("Estás en ${location.latitude}, ${location.longitude}")
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showError(message: String) {
+        Log.e("MainActivity", message)
+        Toast.makeText(this, "Error: $message", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (::binding.isInitialized) {
+            binding.root.removeAllViews()
+        }
     }
 }

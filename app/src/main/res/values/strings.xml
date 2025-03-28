@@ -7,6 +7,16 @@
     <string name="usuario">Perfil</string>
     <string name="home">Home</string>
     <string name="reseña">Reseña</string>
+    <string name="open_drawer">Abrir menú</string>
+    <string name="close_drawer">Cerrar menú</string>
+
+    <string name="user_not_connected">Usuario no conectado</string>
+    <string name="camera_permission_title">Permiso de cámara necesario</string>
+    <string name="camera_permission_message">Esta aplicación necesita acceso a la cámara para tomar fotos de perfil</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="file_creation_error">Error al crear el archivo</string>
+    <string name="logout_success">Cerraste sesión correctamente</string>
 
 
 </resources>

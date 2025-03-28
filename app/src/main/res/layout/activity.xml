@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".View.MenuActivity"
+    tools:context=".View.MainActivity"
     >
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -15,21 +15,21 @@
         android:orientation="vertical"
         >
         <FrameLayout
-            android:id="@+id/fragmentFl"
+            android:id="@+id/FrameLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNav"
+            android:id="@+id/buttonNav"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             app:backgroundTint="@color/gre"
             app:itemIconTint="@color/white"
             app:itemTextAppearanceActive="@color/blue_1"
             app:itemTextAppearanceInactive="@android:color/darker_gray"
-            app:menu="@menu/botton_nav"
+            app:menu="@menu/nav_button"
             tools:ignore="MissingConstraints" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 

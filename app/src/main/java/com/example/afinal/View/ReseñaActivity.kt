@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.afinal.R
 import com.example.afinal.databinding.EditarBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -23,11 +24,11 @@ class ReseñaActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         // Añadir mensajes de ejemplo
-        addMessage(binding.messagesContainer, "User  1", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
-        addMessage(binding.messagesContainer, "User  2", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
-        addMessage(binding.messagesContainer, "User  3", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
-        addMessage(binding.messagesContainer, "User  4", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
-        addMessage(binding.messagesContainer, "User  5", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
+       // addMessage(binding.messagesContainer, "User  1", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
+       // addMessage(binding.messagesContainer, "User  2", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
+        //addMessage(binding.messagesContainer, "User  3", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
+       // addMessage(binding.messagesContainer, "User  4", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
+       // addMessage(binding.messagesContainer, "User  5", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.")
     }
 
     private fun addMessage(container: LinearLayout, user: String, message: String) {
@@ -43,7 +44,7 @@ class ReseñaActivity : AppCompatActivity() {
         val messageView = TextView(this).apply {
             text = message
             textSize = 14f
-            setTextColor(ContextCompat.getColor(this@ReseñaActivity, R.color.darker_gray))
+            setTextColor(ContextCompat.getColor(this@ReseñaActivity, R.color.green))
             setPadding(0, 0, 0, 24)
         }
 

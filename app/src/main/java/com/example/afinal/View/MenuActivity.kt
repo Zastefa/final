@@ -56,11 +56,11 @@ class MenuActivity: AppCompatActivity() {
 
    // }
 
-    private fun setFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentFl, fragment)
-            .commit()
-    }
+   // private fun setFragment(fragment: Fragment){
+        //supportFragmentManager.beginTransaction()
+            //.replace(R.id.fragmentFl, fragment)
+            //.commit()
+    //}
 
 
 

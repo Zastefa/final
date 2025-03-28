@@ -65,12 +65,13 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
     implementation ("com.google.android.material:material:1.12.0")
-
-    implementation("com.google.android.material:material:1.12.0")
     implementation("com.google.firebase:firebase-firestore:25.1.1")
     implementation("com.google.android.gms:play-services-maps:19.0.0")
 
     implementation("androidx.activity:activity:1.10.1")
+    implementation("androidx.navigation:navigation-ui:2.8.9")
+
+
 
 
 
