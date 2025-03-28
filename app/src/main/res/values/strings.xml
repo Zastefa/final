@@ -17,6 +17,9 @@
     <string name="cancel">Cancelar</string>
     <string name="file_creation_error">Error al crear el archivo</string>
     <string name="logout_success">Cerraste sesión correctamente</string>
+    <string name="descripcion">Descripción</string>
+    <string name="titulo_de_la_rese_a">Titulo de la reseña</string>
+    <string name="guardar">Guardar</string>
 
 
 </resources>

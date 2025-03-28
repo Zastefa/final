@@ -5,11 +5,18 @@
     <color name="blue_1">#283593</color>
     <color name="green">#1B5E20</color>
     <color name="brown">#5D4037</color>
-    <color name="beiges">#FEF9E7</color>
-    <color name="beig">#FDEBD0</color>
+    <color name="beig">#E5F2F0EB</color>
+    <color name="beiges">#F9ECE3</color>
     <color name="puce">#7A2A3C</color>
     <color name="gre">#73BCC8</color>
-    <color name="ore">#E99E75</color>
+    <color name="orange">#A03D07</color>
+    <color name="ore">#F4CEB4</color>
+    <color name="fuc">#CC0C8D</color>
+    <color name="fer">#91B442</color>
+    <color name="prore">#009688</color>
+    <color name="oren">#BF9367</color>
+    <color name="opre">#673AB7</color>
+
 
 
 </resources>

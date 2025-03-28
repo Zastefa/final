@@ -8,62 +8,118 @@
     tools:context=".View.UsuarioActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="409dp"
-        android:layout_height="913dp"
-        android:background="@drawable/even"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/planner"
+        android:text="Crea una cuenta nueva"
+        android:textAlignment="center"
+        android:textColor="@color/blue_1"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:text="¿Ya estás registrado? Iniciá sesión acá."
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextNombre"
-        android:layout_width="303dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="72dp"
+        android:layout_width="332dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="16dp"
+        android:hint="Nombre"
+        android:background="@drawable/custom_imput1"
         android:ems="10"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.334"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/editTextEmail"
-        android:layout_width="303dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="432dp"
+        android:layout_width="332dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_imput1"
         android:ems="10"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
+        android:hint="Email"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombre"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="303dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="200dp"
+        android:layout_width="332dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_imput1"
         android:ems="10"
+        android:hint="Password"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/butRegistro"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextFecha"
+        android:layout_width="332dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_imput1"
+        android:ems="10"
+        android:hint="Fecha de Nacimiento"
+        android:drawableStart="@drawable/calendar"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/butRegistro"
         android:layout_width="95dp"
         android:layout_height="74dp"
+        android:layout_marginTop="32dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.936"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintVertical_bias="0.629"
         app:srcCompat="@drawable/but" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
